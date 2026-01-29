@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_persona_user,access_persona_user,model_mi_persona,base.group_user,1,1,1,1
+access_agendamiento_user,access_agendamiento_user,model_mi_agendamiento,base.group_user,1,1,1,1
+access_mi_medico,access_mi_medico,model_mi_medico,base.group_user,1,1,1,1

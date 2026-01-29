@@ -1,0 +1,62 @@
+<odoo>
+    <record id="mail_template_agendamiento" model="mail.template">
+        <field name="name">Notificación de Agendamiento</field>
+        <field name="model_id" ref="model_mi_agendamiento"/>
+        <field name="subject">Agendamiento: {{ object.titulo }}</field>
+        <field name="email_from">informatica@lavalleja.com.py</field>
+        <field name="email_to">{{ object.persona_id.email }}</field>
+        <field name="partner_to">{{ object.persona_id.id }}</field>
+
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Estimado/a <t t-out="object.persona_id.nombre"/>
+,</p>
+                <p>Su cita ha sido <strong>
+                    <t t-out="object.estado"/>
+                </strong>.
+            </p>
+            <br/>
+            <ul>
+                <li>
+                    <strong>Título:</strong>
+                    <t t-out="object.titulo"/>
+                </li>
+                <li>
+                    <strong>Fecha:</strong>
+                    <t t-out="object.fecha"/>
+                </li>
+            </ul>
+        </div>
+    </field>
+</record>
+
+
+<record id="mail_template_recordatorio" model="mail.template">
+    <field name="name">Recordatorio de Agendamiento</field>
+    <field name="model_id" ref="model_mi_agendamiento"/>
+    <field name="subject">Recordatorio: {{ object.titulo }}</field>
+    <field name="email_from">informatica@lavalleja.com.py</field>
+    <field name="email_to">{{ object.persona_id.email }}</field>
+    <field name="partner_to">{{ object.persona_id.id }}</field>
+
+    <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+            <p>Estimado/a <t t-out="object.persona_id.nombre"/>
+,</p>
+            <p>Le recordamos que tiene un agendamiento programado:</p>
+            <ul>
+                <li>
+                    <strong>Título:</strong>
+                    <t t-out="object.titulo"/>
+                </li>
+                <li>
+                    <strong>Fecha:</strong>
+                    <t t-out="object.fecha"/>
+                </li>
+            </ul>
+            <p>Por favor asegúrese de estar disponible en la fecha y hora indicadas.</p>
+        </div>
+    </field>
+</record>
+
+</odoo>
