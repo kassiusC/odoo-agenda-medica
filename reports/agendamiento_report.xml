@@ -1,0 +1,50 @@
+<odoo>
+    <record id="action_report_agendamiento" model="ir.actions.report">
+        <field name="name">Reporte de Agendamientos</field>
+        <field name="model">mi.agendamiento</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mi_modulo.report_agendamiento_template</field>
+        <field name="report_file">mi_modulo.report_agendamiento_template</field>
+        <field name="print_report_name">'Reporte_Agendamiento'</field>
+        <field name="binding_model_id" ref="model_mi_agendamiento"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_agendamiento_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Listado de Agendamientos</h2>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Fecha</th>
+                                <th>Persona</th>
+                                <th>Médico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="o">
+                                <tr>
+                                    <td>
+                                        <span t-field="o.titulo"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.fecha"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.persona_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.medico_id"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

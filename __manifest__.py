@@ -9,6 +9,7 @@
         'views/agendamiento_views.xml',
         'data/mail_templates.xml',
         'data/ir_cron.xml',
+        'reports/agendamiento_report.xml', 
     ],
     'installable': True,
     'application': True,

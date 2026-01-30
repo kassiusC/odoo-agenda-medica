@@ -57,6 +57,10 @@
         <field name="priority">10</field>
         <field name="arch" type="xml">
             <list string="Agendamientos">
+                <header>
+                    <button name="%(action_report_agendamiento)d" string="Imprimir Reporte" type="action" class="btn-primary"/>
+                </header>
+
                 <field name="titulo"/>
                 <field name="fecha"/>
                 <field name="estado" widget="statusbar"/>
@@ -157,4 +161,5 @@
 
     <!-- Menú Dashboard -->
     <menuitem id="menu_agendamiento_dashboard" name="Dashboard" parent="menu_agenda_root" action="action_agendamiento_dashboard"/>
+
 </odoo>

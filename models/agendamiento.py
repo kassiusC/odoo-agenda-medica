@@ -82,3 +82,5 @@ class Agendamiento(models.Model):
                 template = self.env.ref('mi_modulo.mail_template_recordatorio')
                 template.send_mail(cita.id, force_send=True)
                 cita.reminder_sent = True
+    
+
