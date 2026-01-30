@@ -1,0 +1,49 @@
+<odoo>
+    <!-- Vista formulario Personas -->
+    <record id="vista_form_persona" model="ir.ui.view">
+        <field name="name">mi.persona.form</field>
+        <field name="model">mi.persona</field>
+        <field name="arch" type="xml">
+            <form string="Persona">
+                <sheet>
+                    <group>
+                        <field name="nombre"/>
+                        <field name="telefono"/>
+                        <field name="enviar_email"/>
+                        <field name="email" invisible="not enviar_email"/>
+                        <field name="activo"/>
+                    </group>
+                    <notebook>
+                        <page string="Agendamientos">
+                            <field name="agendamiento_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista lista Personas -->
+    <record id="vista_list_persona" model="ir.ui.view">
+        <field name="name">mi.persona.list</field>
+        <field name="model">mi.persona</field>
+        <field name="arch" type="xml">
+            <list string="Personas">
+                <field name="nombre"/>
+                <field name="telefono"/>
+                <field name="email"/>
+                <field name="activo"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Acción Personas -->
+    <record id="action_persona" model="ir.actions.act_window">
+        <field name="name">Personas</field>
+        <field name="res_model">mi.persona</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Submenú Personas -->
+    <menuitem id="menu_persona" name="Personas" parent="menu_agenda_root" action="action_persona"/>
+</odoo>

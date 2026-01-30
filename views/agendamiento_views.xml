@@ -20,12 +20,8 @@
         <field name="arch" type="xml">
             <form string="Agendamiento">
                 <header>
-                    <div class="flex-grow-1"/>
-
                     <button name="action_confirmar" type="object" string="Confirmar Cita" class="btn-primary oe_highlight" invisible="not id or estado != 'pendiente'"/>
-
                     <button name="action_cancelar" type="object" string="Cancelar Cita" class="btn-danger" invisible="not id or not (estado in ['pendiente','confirmado'])"/>
-
                     <button name="action_enviar_recordatorio" type="object" string="Enviar recordatorio" class="btn-info" invisible="not id or estado != 'pendiente'"/>
                 </header>
                 <sheet>
@@ -41,7 +37,7 @@
         </field>
     </record>
 
-    <!-- Vista lista Agendamientos (inline reducida, prioridad baja) -->
+    <!-- Vista lista reducida -->
     <record id="vista_list_agendamiento_inline" model="ir.ui.view">
         <field name="name">mi.agendamiento.list.inline</field>
         <field name="model">mi.agendamiento</field>
@@ -54,7 +50,7 @@
         </field>
     </record>
 
-    <!-- Vista lista Agendamientos (completa, prioridad más alta) -->
+    <!-- Vista lista completa -->
     <record id="vista_list_agendamiento" model="ir.ui.view">
         <field name="name">mi.agendamiento.list</field>
         <field name="model">mi.agendamiento</field>
@@ -70,71 +66,7 @@
         </field>
     </record>
 
-    <!-- Acción Agendamientos con calendario como vista inicial y lista completa -->
-    <record id="action_agendamiento" model="ir.actions.act_window">
-        <field name="name">Agendamientos</field>
-        <field name="res_model">mi.agendamiento</field>
-        <field name="view_mode">kanban,calendar,form,list</field>
-        <field name="view_id" ref="vista_calendar_agendamiento"/>
-        <field name="views">[(ref('vista_calendar_agendamiento'),'calendar'),
-                             (ref('vista_form_agendamiento'),'form'),
-                             (ref('vista_list_agendamiento'),'list')]</field>
-    </record>
-
-    <!-- Acción Personas -->
-    <record id="action_persona" model="ir.actions.act_window">
-        <field name="name">Personas</field>
-        <field name="res_model">mi.persona</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <!-- Acción para abrir médicos -->
-    <record id="action_medico" model="ir.actions.act_window">
-        <field name="name">Medicos</field>
-        <field name="res_model">mi.medico</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <!-- Vista formulario Personas -->
-    <record id="vista_form_persona" model="ir.ui.view">
-        <field name="name">mi.persona.form</field>
-        <field name="model">mi.persona</field>
-        <field name="arch" type="xml">
-            <form string="Persona">
-                <sheet>
-                    <group>
-                        <field name="nombre"/>
-                        <field name="telefono"/>
-                        <field name="enviar_email"/>
-                        <field name="email" invisible="not enviar_email"/>
-                        <field name="activo"/>
-                    </group>
-                    <notebook>
-                        <page string="Agendamientos">
-                            <!-- Inline usa la vista reducida por prioridad -->
-                            <field name="agendamiento_ids"/>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <!-- Vista lista Personas -->
-    <record id="vista_list_persona" model="ir.ui.view">
-        <field name="name">mi.persona.list</field>
-        <field name="model">mi.persona</field>
-        <field name="arch" type="xml">
-            <list string="Personas">
-                <field name="nombre"/>
-                <field name="telefono"/>
-                <field name="email"/>
-                <field name="activo"/>
-            </list>
-        </field>
-    </record>
-
-    <!-- Vista kanban Agendamientos sin orden forzado -->
+    <!-- Vista kanban -->
     <record id="vista_kanban_agendamiento" model="ir.ui.view">
         <field name="name">mi.agendamiento.kanban</field>
         <field name="model">mi.agendamiento</field>
@@ -147,8 +79,8 @@
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_card" t-att-class="record.estado.raw_value == 'pendiente' and 'bg-warning' or
-                                        record.estado.raw_value == 'confirmado' and 'bg-success text-white' or
-                                        record.estado.raw_value == 'cancelado' and 'bg-danger text-white' or ''">
+                                          record.estado.raw_value == 'confirmado' and 'bg-success text-white' or
+                                          record.estado.raw_value == 'cancelado' and 'bg-danger text-white' or ''">
                             <div class="o_kanban_primary">
                                 <strong>
                                     <field name="titulo"/>
@@ -175,41 +107,7 @@
         </field>
     </record>
 
-    <!-- Vista lista -->
-    <record id="view_tree_medico" model="ir.ui.view">
-        <field name="name">mi.medico.tree</field>
-        <field name="model">mi.medico</field>
-        <field name="arch" type="xml">
-            <list string="Médicos">
-                <field name="nombre"/>
-                <field name="especialidad"/>
-                <field name="telefono"/>
-                <field name="email"/>
-                <field name="activo"/>
-            </list>
-        </field>
-    </record>
-
-    <!-- Vista formulario -->
-    <record id="view_form_medico" model="ir.ui.view">
-        <field name="name">mi.medico.form</field>
-        <field name="model">mi.medico</field>
-        <field name="arch" type="xml">
-            <form string="Médico">
-                <sheet>
-                    <group>
-                        <field name="nombre"/>
-                        <field name="especialidad"/>
-                        <field name="telefono"/>
-                        <field name="email"/>
-                        <field name="activo"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <!-- Vista gráfica de agendamientos -->
+    <!-- Vista gráfica -->
     <record id="vista_graph_agendamiento" model="ir.ui.view">
         <field name="name">mi.agendamiento.graph</field>
         <field name="model">mi.agendamiento</field>
@@ -222,7 +120,7 @@
         </field>
     </record>
 
-    <!-- Vista pivot de agendamientos -->
+    <!-- Vista pivot -->
     <record id="vista_pivot_agendamiento" model="ir.ui.view">
         <field name="name">mi.agendamiento.pivot</field>
         <field name="model">mi.agendamiento</field>
@@ -234,6 +132,17 @@
         </field>
     </record>
 
+    <!-- Acción Agendamientos -->
+    <record id="action_agendamiento" model="ir.actions.act_window">
+        <field name="name">Agendamientos</field>
+        <field name="res_model">mi.agendamiento</field>
+        <field name="view_mode">kanban,calendar,form,list</field>
+        <field name="view_id" ref="vista_calendar_agendamiento"/>
+        <field name="views">[(ref('vista_calendar_agendamiento'),'calendar'),
+                             (ref('vista_form_agendamiento'),'form'),
+                             (ref('vista_list_agendamiento'),'list')]</field>
+    </record>
+
     <!-- Acción Dashboard -->
     <record id="action_agendamiento_dashboard" model="ir.actions.act_window">
         <field name="name">Dashboard de Agendamientos</field>
@@ -243,17 +152,8 @@
                              (ref('vista_pivot_agendamiento'),'pivot')]</field>
     </record>
 
-
-
-
-    <!-- Menú raíz Agenda (sin acción) -->
+    <!-- Menú raíz Agenda -->
     <menuitem id="menu_agenda_root" name="Agenda"/>
-
-    <!-- Submenú Personas -->
-    <menuitem id="menu_persona" name="Personas" parent="menu_agenda_root" action="action_persona"/>
-
-    <!-- Submenú Médicos -->
-    <menuitem id="menu_medico" name="Medicos" parent="menu_agenda_root" action="action_medico"/>
 
     <!-- Menú Dashboard -->
     <menuitem id="menu_agendamiento_dashboard" name="Dashboard" parent="menu_agenda_root" action="action_agendamiento_dashboard"/>
