@@ -1,5 +1,5 @@
 {
-    'name': 'Mi Primer Módulo',
+    'name': 'Agenda Medica',
     'version': '1.0',
     'depends': ['base', 'mail'],
     'data': [
