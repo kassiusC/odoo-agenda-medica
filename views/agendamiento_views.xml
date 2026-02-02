@@ -28,6 +28,7 @@
                     <group>
                         <field name="titulo"/>
                         <field name="fecha"/>
+                        <field name="fecha_fin"/>
                         <field name="estado"/>
                         <field name="persona_id"/>
                         <field name="medico_id"/>
