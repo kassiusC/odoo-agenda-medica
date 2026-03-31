@@ -134,3 +134,13 @@ class Agendamiento(models.Model):
                 
                 if colision:
                     raise ValidationError("El médico ya tiene una cita en ese rango de tiempo.")
+                
+    def action_abrir_wizard_reprogramar(self):
+        return {
+            'name': 'Reprogramar Cita',
+            'type': 'ir.actions.act_window',
+            'res_model': 'agendamiento.reprogramar.wizard',
+            'view_mode': 'form',
+            'target': 'new', # Esto hace que se abra como pop-up
+            'context': {'default_agendamiento_id': self.id},
+        }

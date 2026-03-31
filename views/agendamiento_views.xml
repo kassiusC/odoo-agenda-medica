@@ -67,6 +67,7 @@
                 <field name="estado" widget="statusbar"/>
                 <field name="persona_id"/>
                 <field name="medico_id"/>
+                <button name="action_abrir_wizard_reprogramar" string="Reprogramar" type="object" icon="fa-calendar" invisible="estado == 'cancelado'"/>
             </list>
         </field>
     </record>
@@ -134,6 +135,33 @@
                 <field name="estado" type="col"/>
                 <field name="id" type="measure"/>
             </pivot>
+        </field>
+    </record>
+
+    <!-- wizard -->
+    <record id="view_reprogramar_wizard_form" model="ir.ui.view">
+        <field name="name">agendamiento.reprogramar.wizard.form</field>
+        <field name="model">agendamiento.reprogramar.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reprogramar Cita">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        Seleccione la nueva fecha para el agendamiento. El sistema recalculará la duración automáticamente.
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="nueva_fecha" widget="datetime" options="{'datepicker': {'warn_future': True}}"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_reprogramar" string="Confirmar Nueva Fecha" type="object" class="btn-primary"/>
+                    <button string="Descartar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
         </field>
     </record>
 
